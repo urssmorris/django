@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#git commitedddddd
+#git commited
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
