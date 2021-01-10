@@ -4,27 +4,32 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 
+tasks = ["foo", "bar", "baz"]
+
+# Create your views here.
+def index(request):
+    return render(request, "tasks/index.html", {
+        "tasks": tasks
+    })
+
+# Add a new task:
+def add1(request):
+    return render(request, "tasks/add1.html")
+
 #Django Forms
 class NewTaskForm(forms.Form):
     task = forms.CharField(label="New Task")
 
-
-def index(request):
-
-    # Check if there already exists a "tasks" key in our session
-
-    if "tasks" not in request.session:
-
-        # If not, create a new list
-        request.session["tasks"] = []
-
-    return render(request, "tasks/index.html", {
-        "tasks": request.session["tasks"]
+# Add a new task(Form):
+def add2(request):
+    return render(request, "tasks/add2.html", {
+        "form": NewTaskForm()
     })
 
-
-# Add a new task:
+# Add a new task(POST-form):
 def add(request):
+
+    # Check if method is POST
     if request.method == "POST":
 
         # Take in the data the user submitted and save it as form
@@ -37,10 +42,11 @@ def add(request):
             task = form.cleaned_data["task"]
 
             # Add the new task to our list of tasks
-            request.session["tasks"] += [task]
+            tasks.append(task)
 
             # Redirect user to list of tasks
             return HttpResponseRedirect(reverse("tasks:index"))
+
         else:
 
             # If the form is invalid, re-render the page with existing information.
@@ -51,5 +57,3 @@ def add(request):
     return render(request, "tasks/add.html", {
         "form": NewTaskForm()
     })
-
-    #python manage.py migrate
