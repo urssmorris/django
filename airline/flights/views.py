@@ -6,6 +6,6 @@ from . models import Flight, Airport
 # Create your views here.
 
 def index(request):
-    return render(request, "index.html", {
+    return render(request, "flights/index.html", {
         "flights": Flight.objects.all()
     })
