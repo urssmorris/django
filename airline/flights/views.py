@@ -2,11 +2,11 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 
 #Import models
-<<<<<<< HEAD
+
 from .models import Flight, Airport, Passenger
-=======
+
 from .models import Flight, Airport
->>>>>>> 926755a91b13312731e3573d7d9f9268ff35cc82
+
 
 # Create your views here.
 
@@ -15,7 +15,7 @@ def index(request):
         "flights": Flight.objects.all()
     })
 
-<<<<<<< HEAD
+
 #vista vuelos
 def flight(request, flight_id):
     flight = Flight.objects.get(id=flight_id)
@@ -58,10 +58,10 @@ def book(request, flight_id):
 
         # Redirect user to flight page
         return HttpResponseRedirect(reverse("flight", args=(flight.id,)))
-=======
+
 def flight(request, flight_id):
     flight = Flight.objects.get(id=flight_id)
     return render(request, "flights/flight.html", {
         "flight": flight
     })
->>>>>>> 926755a91b13312731e3573d7d9f9268ff35cc82
+
